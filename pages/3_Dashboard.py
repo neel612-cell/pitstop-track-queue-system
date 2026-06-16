@@ -149,28 +149,39 @@ st.progress(
 st.divider()
 
 st.subheader(
-    f"Welcome, {name}"
+    f"Welcome, {name.title()}"
 )
 
 left, right = st.columns(2)
 
 with left:
 
-    st.info(
-        f"""
-Token: {token}
-
-RID: {unique_id}
-"""
-    )
+    st.markdown(f"""
+    <div style="
+        background:#2A2A2A;
+        padding:20px;
+        border-radius:12px;
+        border-left:5px solid #E60000;
+    ">
+        <h4 style="margin:0;color:#FFE000;">TOKEN</h4>
+        <p style="font-size:24px;margin:10px 0;">{token}</p>
+        <p style="color:#CCCCCC;">{unique_id}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 with right:
 
-    st.info(
-    f"""
-Status: {status}
-"""
-)
+    st.markdown(f"""
+    <div style="
+        background:#2A2A2A;
+        padding:20px;
+        border-radius:12px;
+        border-left:5px solid #FFE000;
+    ">
+        <h4 style="margin:0;color:#FFE000;">STATUS</h4>
+        <p style="font-size:24px;margin:10px 0;">{status}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ==========================================
 # LIVE STATUS
