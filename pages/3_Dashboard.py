@@ -98,11 +98,11 @@ progress = max(
 # HEADER
 # ==========================================
 
-st.title("LIVE TRACK OPERATIONS")
+st.markdown("""
+# PITSTOP
 
-st.caption(
-    "Real-time queue tracking dashboard"
-)
+### Race Control
+""")
 
 # ==========================================
 # ANALYTICS
@@ -130,9 +130,9 @@ with col3:
 
 with col4:
     st.metric(
-        "Progress",
-        f"{progress}%"
-    )
+    "Progress",
+    f"{progress:.0f}%"
+)
 
 # ==========================================
 # PROGRESS BAR
