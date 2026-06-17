@@ -195,26 +195,61 @@ st.subheader(
 
 st.markdown("### Queue Timeline")
 
-timeline = ""
+timeline_html = """
+<div style="
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:20px;
+">
+"""
 
 for rider_token, rider_status in queue_window:
 
-    if rider_status == "On Track":
-        timeline += f" 🟢 {rider_token} "
+    if rider_token == token:
+
+        color = "#E60000"
+        text = "CURRENT"
+
+    elif rider_status == "On Track":
+
+        color = "#FFE000"
+        text = "TRACK"
 
     elif rider_status == "Completed":
-        timeline += f" ✅ {rider_token} "
+
+        color = "#00C853"
+        text = "DONE"
 
     elif rider_status == "Skipped":
-        timeline += f" ⏭️ {rider_token} "
 
-    elif rider_token == token:
-        timeline += f" 🔴 **{rider_token}** "
+        color = "#FF5252"
+        text = "SKIP"
 
     else:
-        timeline += f" ⚪ {rider_token} "
 
-st.markdown(timeline)
+        color = "#F5F5F0"
+        text = ""
+
+    timeline_html += f"""
+    <div style="
+    background:{color};
+    color:black;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:600;
+    ">
+    {rider_token}
+    </div>
+    """
+
+timeline_html += "</div>"
+
+st.markdown(
+    timeline_html,
+    unsafe_allow_html=True
+)
 
 if status == "Waiting":
 
@@ -225,7 +260,7 @@ if status == "Waiting":
 elif status == "On Track":
 
     st.success(
-        "You Are Currently On Track"
+        "Currently On Track"
     )
 
 elif status == "Completed":
@@ -237,7 +272,7 @@ elif status == "Completed":
 elif status == "Skipped":
 
     st.error(
-        "You Were Marked As Skipped"
+        "Marked As Skipped"
     )
 
 else:
