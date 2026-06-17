@@ -16,6 +16,9 @@ st.set_page_config(
     page_icon="🏁",
     layout="wide"
 )
+st.logo(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Flag_of_motor_racing.svg/512px-Flag_of_motor_racing.svg.png"
+)
 
 # ==========================================
 # PREMIUM FERRARI THEME

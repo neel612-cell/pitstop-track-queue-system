@@ -99,10 +99,42 @@ progress = max(
 # ==========================================
 
 st.markdown("""
-# PITSTOP
+<div style="
+background:linear-gradient(90deg,#1A1A1A,#2A2A2A);
+padding:25px;
+border-radius:16px;
+border-left:6px solid #E60000;
+margin-bottom:20px;
+">
 
-### Race Control
-""")
+<h1 style="
+color:#FFFFFF;
+font-size:48px;
+font-weight:800;
+margin:0;
+">
+PITSTOP
+</h1>
+
+<p style="
+color:#FFE000;
+font-size:20px;
+font-weight:600;
+margin:0;
+">
+Track Queue Management System
+</p>
+
+<p style="
+color:#BBBBBB;
+font-size:14px;
+margin-top:8px;
+">
+Live Queue • Real-Time Tracking • Digital Rider Pass
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
 # ==========================================
 # ANALYTICS
@@ -189,67 +221,45 @@ with right:
 
 st.divider()
 
-st.subheader(
-    "Live Queue Status"
-)
+st.subheader("Live Queue Status")
 
 st.markdown("### Queue Timeline")
 
-timeline_html = """
-<div style="
-display:flex;
-align-items:center;
-flex-wrap:wrap;
-gap:10px;
-margin-bottom:20px;
-">
-"""
+cols = st.columns(len(queue_window))
 
-for rider_token, rider_status in queue_window:
+for i, (rider_token, rider_status) in enumerate(queue_window):
 
     if rider_token == token:
-
         color = "#E60000"
-        text = "CURRENT"
 
     elif rider_status == "On Track":
-
         color = "#FFE000"
-        text = "TRACK"
 
     elif rider_status == "Completed":
-
         color = "#00C853"
-        text = "DONE"
 
     elif rider_status == "Skipped":
-
         color = "#FF5252"
-        text = "SKIP"
 
     else:
-
         color = "#F5F5F0"
-        text = ""
 
-    timeline_html += f"""
-    <div style="
-    background:{color};
-    color:black;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:600;
-    ">
-    {rider_token}
-    </div>
-    """
-
-timeline_html += "</div>"
-
-st.markdown(
-    timeline_html,
-    unsafe_allow_html=True
-)
+    with cols[i]:
+        st.markdown(
+            f"""
+            <div style="
+                background:{color};
+                color:black;
+                padding:10px;
+                border-radius:20px;
+                text-align:center;
+                font-weight:700;
+            ">
+                {rider_token}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
 if status == "Waiting":
 
